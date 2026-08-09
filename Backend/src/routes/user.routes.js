@@ -1,0 +1,14 @@
+const express = require("express")
+const userController = require("../controllers/user.controller")
+const identifyUser = require("../middlewares/auth.middleware")
+
+const userRouter = express.Router();
+
+userRouter.post("/follow/:username",identifyUser,userController.followUserController)
+userRouter.post("/unfollow/:username",identifyUser,userController.unfollowUserController)
+userRouter.get("/follow/requests",identifyUser,userController.getFollowRequestsController)
+userRouter.post("/follow/requests/:username/accept",identifyUser,userController.acceptFollowRequestController)
+userRouter.post("/follow/requests/:username/reject",identifyUser,userController.rejectFollowRequestController)
+
+
+module.exports = userRouter
