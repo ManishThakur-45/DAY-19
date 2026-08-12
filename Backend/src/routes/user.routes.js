@@ -1,14 +1,26 @@
-const express = require("express")
+const express = require('express');
 const userController = require("../controllers/user.controller")
 const identifyUser = require("../middlewares/auth.middleware")
 
 const userRouter = express.Router();
 
-userRouter.post("/follow/:username",identifyUser,userController.followUserController)
-userRouter.post("/unfollow/:username",identifyUser,userController.unfollowUserController)
-userRouter.get("/follow/requests",identifyUser,userController.getFollowRequestsController)
-userRouter.post("/follow/requests/:username/accept",identifyUser,userController.acceptFollowRequestController)
-userRouter.post("/follow/requests/:username/reject",identifyUser,userController.rejectFollowRequestController)
+
+/**
+ * @route POST /api/users/follow/:userid
+ * @description Follow a user
+ * @access Private
+ */
+userRouter.post("/follow/:username", identifyUser, userController.followUserController)
 
 
-module.exports = userRouter
+/** 
+ * @route POST /api/users/unfollow/:userid
+ * @description Unfollow a user
+ * @access Private
+ */
+userRouter.post("/unfollow/:username", identifyUser, userController.unfollowUserController)
+
+
+
+
+module.exports = userRouter;
